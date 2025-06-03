@@ -8,6 +8,7 @@ const Navbar = () => {
   const [navOpen, setNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showNestedDropdown, setShowNestedDropdown] = useState(false);
 
   const toggleNav = () => setNavOpen(!navOpen);
 
@@ -60,7 +61,10 @@ const Navbar = () => {
             <div
               className="relative group"
               onMouseEnter={() => setShowDropdown(true)}
-              onMouseLeave={() => setShowDropdown(false)}
+              onMouseLeave={() => {
+                setShowDropdown(false);
+                setShowNestedDropdown(false);
+              }}
             >
               <Link
                 to="/products"
@@ -77,13 +81,54 @@ const Navbar = () => {
                     transition={{ duration: 0.3 }}
                     className="absolute left-0 top-full mt-3 bg-white shadow-lg py-2 w-64 z-50 border border-gray-700"
                   >
-                    <Link to="/products/medical-instruments" className="block px-4 py-2 hover:bg-blue-100">Surface & Environment</Link>
-                    <Link to="/products/disinfectants" className="block px-4 py-2 hover:bg-blue-100">Disinfectants</Link>
-                    <Link to="/products/anesthesia" className="block px-4 py-2 hover:bg-blue-100">Anesthesia Segment / Injectable Range</Link>
-                    <Link to="/products/antibiotics" className="block px-4 py-2 hover:bg-blue-100">Anti Infective / Antibiotics</Link>
-                    <Link to="/products/antacid" className="block px-4 py-2 hover:bg-blue-100">Antacid / P.P.I’s / Laxatives</Link>
-                    <Link to="/products/supplements" className="block px-4 py-2 hover:bg-blue-100">Vitamins, Supplements & Immunoboosters</Link>
-                    <Link to="/products/antiseptics" className="block px-4 py-2 hover:bg-blue-100">Hand, Skin & Oral Antiseptics</Link>
+                    {/* Top Categories with Nested Dropdown on Hover */}
+                    <div 
+                      className="relative group"
+                      onMouseEnter={() => setShowNestedDropdown(true)}
+                      onMouseLeave={() => setShowNestedDropdown(false)}
+                    >
+                      <span className="px-4 py-2 hover:bg-blue-100 cursor-pointer flex justify-between items-center">
+                        Top Categories
+                      </span>
+
+                      {/* Nested Dropdown */}
+                      {showNestedDropdown && (
+                        <div className="absolute left-full top-0 w-50 bg-white shadow-lg border border-gray-700 z-50">
+                          <Link to="/products/medical-instruments" className="block px-4 py-2 hover:bg-blue-100">
+                            Medical Instruments
+                          </Link>
+                          <Link to="/products/surgical-equipment" className="block px-4 py-2 hover:bg-blue-100">
+                            Surgical Equipment
+                          </Link>
+                          <Link to="/products/orthopedic-tools" className="block px-4 py-2 hover:bg-blue-100">
+                            Orthopedic Tools
+                          </Link>
+                          <Link to="/products/hospital-furniture" className="block px-4 py-2 hover:bg-blue-100">
+                            Hospital Furniture
+                          </Link>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Other Dropdown Items */}
+                    <Link to="/products/disinfectants" className="block px-4 py-2 hover:bg-blue-100">
+                      Disinfectants
+                    </Link>
+                    <Link to="/products/anesthesia" className="block px-4 py-2 hover:bg-blue-100">
+                      Anesthesia Segment / Injectable Range
+                    </Link>
+                    <Link to="/products/antibiotics" className="block px-4 py-2 hover:bg-blue-100">
+                      Anti Infective / Antibiotics
+                    </Link>
+                    <Link to="/products/antacid" className="block px-4 py-2 hover:bg-blue-100">
+                      Antacid / P.P.I’s / Laxatives
+                    </Link>
+                    <Link to="/products/supplements" className="block px-4 py-2 hover:bg-blue-100">
+                      Vitamins, Supplements & Immunoboosters
+                    </Link>
+                    <Link to="/products/antiseptics" className="block px-4 py-2 hover:bg-blue-100">
+                      Hand, Skin & Oral Antiseptics
+                    </Link>
                   </motion.div>
                 )}
               </AnimatePresence>
