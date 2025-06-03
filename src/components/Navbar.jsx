@@ -19,6 +19,12 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
+  useEffect(() => {
+    setShowDropdown(false);
+    setShowNestedDropdown(false);
+  }, [location.pathname]);
+
 
   const isActive = (path) => location.pathname === path;
 
@@ -91,9 +97,15 @@ const Navbar = () => {
                         Top Categories
                       </span>
 
-                      {/* Nested Dropdown */}
+                      <AnimatePresence>
                       {showNestedDropdown && (
-                        <div className="absolute left-full top-0 w-50 bg-white shadow-lg border border-gray-700 z-50">
+                        <motion.div
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -10 }}
+                          transition={{ duration: 0.3 }}
+                          className="absolute left-full top-0 w-50 bg-white shadow-lg border border-gray-700 z-50"
+                        >
                           <Link to="/products/medical-instruments" className="block px-4 py-2 hover:bg-blue-100">
                             Medical Instruments
                           </Link>
@@ -106,8 +118,9 @@ const Navbar = () => {
                           <Link to="/products/hospital-furniture" className="block px-4 py-2 hover:bg-blue-100">
                             Hospital Furniture
                           </Link>
-                        </div>
+                        </motion.div>
                       )}
+                    </AnimatePresence>
                     </div>
 
                     {/* Other Dropdown Items */}
