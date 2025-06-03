@@ -21,17 +21,29 @@ const Navbar = () => {
 
   const isActive = (path) => location.pathname === path;
 
+  const navLinkClass = (path) =>
+    `px-3 py-2 transition font-semibold ${
+      isActive(path)
+        ? 'text-blue-700 font-bold border-b-2 border-blue-700'
+        : 'hover:text-blue-600'
+    }`;
+
   return (
     <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-gray-50 shadow-md' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link to="/" className="text-3xl font-bold font-mono text-blue-700">Speciality Meditech</Link>
+          <Link 
+            to="/" 
+            className="text-2xl pt-1 font-bold text-black"
+          >
+            SPECIALITY<br /><span className="font-thin px-2">MEDITECH</span>
+          </Link>
 
-          <div className="hidden md:flex font-semibold space-x-6 relative">
+          <div className="hidden md:flex items-center space-x-6 relative">
             {/* Home */}
             <Link
               to="/"
-              className={`px-3 py-2 rounded-md transition ${isActive("/") ? "bg-blue-200" : "hover:bg-blue-200"}`}
+              className={navLinkClass('/')}
             >
               Home
             </Link>
@@ -39,20 +51,20 @@ const Navbar = () => {
             {/* About */}
             <Link
               to="/about"
-              className={`px-3 py-2 rounded-md transition ${isActive("/about") ? "bg-blue-200" : "hover:bg-blue-200"}`}
+              className={navLinkClass('/about')}
             >
               About
             </Link>
 
             {/* Products with Dropdown */}
             <div
-              className="relative group mt-2"
+              className="relative group"
               onMouseEnter={() => setShowDropdown(true)}
               onMouseLeave={() => setShowDropdown(false)}
             >
               <Link
                 to="/products"
-                className={`px-3 py-2 rounded-md transition ${isActive("/products") ? "bg-blue-200" : "hover:bg-blue-200"}`}
+                className={navLinkClass('/products')}
               >
                 Products
               </Link>
@@ -63,7 +75,7 @@ const Navbar = () => {
                     animate={{ opacity: 1, y: 8 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute left-0 top-full mt-1 bg-white shadow-lg py-2 w-64 z-50 border border-gray-700"
+                    className="absolute left-0 top-full mt-3 bg-white shadow-lg py-2 w-64 z-50 border border-gray-700"
                   >
                     <Link to="/products/medical-instruments" className="block px-4 py-2 hover:bg-blue-100">Surface & Environment</Link>
                     <Link to="/products/disinfectants" className="block px-4 py-2 hover:bg-blue-100">Disinfectants</Link>
@@ -80,26 +92,26 @@ const Navbar = () => {
             {/* Contact */}
             <Link
               to="/contact"
-              className={`px-3 py-2 rounded-md transition ${isActive("/contact") ? "bg-blue-200" : "hover:bg-blue-200"}`}
+              className={navLinkClass('/contact')}
             >
               Contact
             </Link>
             {/* Media */}
             <Link
               to="/media"
-              className={`px-3 py-2 rounded-md transition ${isActive("/media") ? "bg-blue-200" : "hover:bg-blue-200"}`}
+              className={navLinkClass('/media')}
             >
               Media
             </Link>{/* Blogs */}
             <Link
               to="/blogs"
-              className={`px-3 py-2 rounded-md transition ${isActive("/blogs") ? "bg-blue-200" : "hover:bg-blue-200"}`}
+              className={navLinkClass('/blogs')}
             >
               Blogs
             </Link>{/* Careers */}
             <Link
               to="/careers"
-              className={`px-3 py-2 rounded-md transition ${isActive("/careers") ? "bg-blue-200" : "hover:bg-blue-200"}`}
+              className={navLinkClass('/careers')}
             >
               Careers
             </Link>
@@ -117,22 +129,22 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {navOpen && (
         <div className="md:hidden bg-white shadow-md">
-          <div className="flex flex-col items-center space-y-4 py-4">
-            <Link to="/" onClick={toggleNav} className={`px-4 py-2 rounded-md ${isActive("/") ? "text-blue-700 bg-blue-300" : "hover:bg-blue-300"}`}>Home</Link>
-            <Link to="/about" onClick={toggleNav} className="px-4 py-2 rounded-md hover:bg-blue-300">About</Link>
-            <div className="relative">
-              <button className="px-4 py-2 rounded-md hover:bg-blue-300">Products</button>
-              <div className="flex flex-col items-start pl-4">
+          <div className="flex flex-col items-center space-y-0.5 py-4">
+            <Link to="/" onClick={toggleNav} className={navLinkClass('/')}>Home</Link>
+            <Link to="/about" onClick={toggleNav} className={navLinkClass('/about')}>About</Link>
+            <div className="relative w-full flex flex-col items-center">
+              <button className="px-4 py-2 rounded-md font-semibold">Products</button>
+              <div className="flex flex-col items-start pl-8">
                 <Link to="/products/medical-instruments" onClick={toggleNav} className="py-1 hover:text-blue-700">Medical Instruments</Link>
                 <Link to="/products/surgical-equipment" onClick={toggleNav} className="py-1 hover:text-blue-700">Surgical Equipment</Link>
                 <Link to="/products/orthopedic-tools" onClick={toggleNav} className="py-1 hover:text-blue-700">Orthopedic Tools</Link>
                 <Link to="/products/hospital-furniture" onClick={toggleNav} className="py-1 hover:text-blue-700">Hospital Furniture</Link>
               </div>
             </div>
-            <Link to="/contact" onClick={toggleNav} className="px-4 py-2 rounded-md hover:bg-blue-300">Contact</Link>
-            <Link to="/media" onClick={toggleNav} className="px-4 py-2 rounded-md hover:bg-blue-300">Media</Link>
-            <Link to="/blogs" onClick={toggleNav} className="px-4 py-2 rounded-md hover:bg-blue-300">Blogs</Link>
-            <Link to="/careers" onClick={toggleNav} className="px-4 py-2 rounded-md hover:bg-blue-300">Careers</Link>
+            <Link to="/contact" onClick={toggleNav} className={navLinkClass('/contact')}>Contact</Link>
+            <Link to="/media" onClick={toggleNav} className={navLinkClass('/media')}>Media</Link>
+            <Link to="/blogs" onClick={toggleNav} className={navLinkClass('/blogs')}>Blogs</Link>
+            <Link to="/careers" onClick={toggleNav} className={navLinkClass('/careers')}>Careers</Link>
           </div>
         </div>
       )}
