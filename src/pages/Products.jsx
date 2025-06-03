@@ -11,17 +11,25 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0 }
 };
 
+const PRODUCTS_PER_PAGE = 6;
+
 const Products = () => {
   const [search, setSearch] = useState('');
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [submittedSearch, setSubmittedSearch] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
   
   const filteredProducts = productsData.filter((product) =>
     product.name.toLowerCase().includes(submittedSearch.toLowerCase())
   );
 
+  const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
+  const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
+  const currentProducts = filteredProducts.slice(startIndex, startIndex + PRODUCTS_PER_PAGE);
+
   const handleSearch = () => {
     setSubmittedSearch(search);
+    setCurrentPage(1);
   };
 
   const handleKeyDown = (e) => {
@@ -68,8 +76,8 @@ const Products = () => {
       </motion.div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
-        {filteredProducts.length > 0 ? (
-          filteredProducts.map((product, index) => (
+        {currentProducts.length > 0 ? (
+          currentProducts.map((product, index) => (
             <motion.div
               key={product.id}
               variants={fadeInUp}
@@ -94,6 +102,39 @@ const Products = () => {
           </motion.p>
         ) : null}
       </div>
+
+      {/* Pagination Buttons */}
+        {filteredProducts.length > PRODUCTS_PER_PAGE && (
+          <div className="flex justify-center items-center space-x-2 mb-16">
+            <button
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+            >
+              Prev
+            </button>
+            {[...Array(totalPages)].map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentPage(index + 1)}
+                className={`px-4 py-2 rounded ${
+                  currentPage === index + 1
+                    ? 'bg-blue-800 text-white'
+                    : 'bg-gray-200 text-black'
+                }`}
+              >
+                {index + 1}
+              </button>
+            ))}
+            <button
+              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+              className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+            >
+              Next
+            </button>
+          </div>
+        )}
 
       {selectedProduct && (
         <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
