@@ -66,7 +66,7 @@ const WhyChooseUs = () => {
           className="text-center mb-12"
           variants={sectionVariant}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-blue-600 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-blue-800 mb-8">
             Why Choose Us?
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
