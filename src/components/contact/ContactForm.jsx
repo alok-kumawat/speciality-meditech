@@ -36,12 +36,12 @@ const ContactForm = () => {
       >
         <h2 className="text-xl font-semibold mb-6 text-center">Send Us a Message</h2>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6">
-          <div className="flex items-center justify-center gap-7">
+          <div className="lg:flex md:flex items-center justify-center gap-7">
           <input
             type="text"
             name="name"
             placeholder="Your Name"
-            className="border rounded p-3 w-full bg-blue-50"
+            className="border rounded p-3 w-full bg-blue-50 mb-4 lg:mb-0 md:mb-0"
             required
             value={formData.name}
             onChange={handleChange}
@@ -50,7 +50,7 @@ const ContactForm = () => {
             type="email"
             name="email"
             placeholder="Your Email"
-            className="border rounded p-3 w-full bg-blue-50"
+            className="border rounded p-3 w-full bg-blue-50 mb-4 lg:mb-0 md:mb-0"
             required
             value={formData.email}
             onChange={handleChange}
@@ -59,7 +59,7 @@ const ContactForm = () => {
             type="text"
             name="subject"
             placeholder="Subject"
-            className="border rounded p-3 w-full bg-blue-50"
+            className="border rounded p-3 w-full bg-blue-50 mb-4 lg:mb-0 md:mb-0"
             required
             value={formData.subject}
             onChange={handleChange}
@@ -76,7 +76,7 @@ const ContactForm = () => {
           />
           <button
             type="submit"
-            className="bg-blue-600 text-white py-3 px-6 w-40 flex-col-1 items-center justify-self-center rounded hover:bg-blue-700 transition"
+            className="bg-blue-600 text-white py-3 px-6 lg:w-40 md:w-40 sm:w-30 flex-col-1 items-center justify-self-center rounded hover:bg-blue-700 transition"
           >
             Send Message
           </button>
