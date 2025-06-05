@@ -5,7 +5,7 @@ import About from '../pages/About'
 import Products from '../pages/Products'
 import CategoryPage from '../pages/CategoryPage'
 import Contact from '../pages/Contact'
-// import Media from '../pages/Media'
+import Media from '../pages/Media'
 // import Blogs from '../pages/Blogs'
 // import Careers from '../pages/Careers'
 
@@ -16,7 +16,7 @@ const AppRouter = () => (
       <Route path="/products" element={<Products />} />
       <Route path="/products/:category" element={<CategoryPage />} />
       <Route path="/contact" element={<Contact />} />
-      {/* <Route path="/media" element={<Media />} /> */}
+      <Route path="/media" element={<Media />} />
       {/* <Route path="/blogs" element={<Blogs />} /> */}
       {/* <Route path="/careers" element={<Careers />} /> */}
     </Routes>
