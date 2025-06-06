@@ -7,7 +7,8 @@ import CategoryPage from '../pages/CategoryPage'
 import Contact from '../pages/Contact'
 import Media from '../pages/Media'
 import Blogs from '../pages/Blogs'
-// import Careers from '../pages/Careers'
+import Careers from '../pages/Careers'
+import JobApplicationForm from '../pages/JobApplicationForm'
 
 const AppRouter = () => (
     <Routes>
@@ -18,7 +19,9 @@ const AppRouter = () => (
       <Route path="/contact" element={<Contact />} />
       <Route path="/media" element={<Media />} />
       <Route path="/blogs" element={<Blogs />} />
-      {/* <Route path="/careers" element={<Careers />} /> */}
+      <Route path="/careers" element={<Careers />} />
+      <Route path='/careers/apply' element={<JobApplicationForm />} />
+      <Route path='/careers/apply/:jobId' element={<JobApplicationForm />} />
     </Routes>
 )
 
