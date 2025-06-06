@@ -6,7 +6,7 @@ import Products from '../pages/Products'
 import CategoryPage from '../pages/CategoryPage'
 import Contact from '../pages/Contact'
 import Media from '../pages/Media'
-// import Blogs from '../pages/Blogs'
+import Blogs from '../pages/Blogs'
 // import Careers from '../pages/Careers'
 
 const AppRouter = () => (
@@ -17,7 +17,7 @@ const AppRouter = () => (
       <Route path="/products/:category" element={<CategoryPage />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/media" element={<Media />} />
-      {/* <Route path="/blogs" element={<Blogs />} /> */}
+      <Route path="/blogs" element={<Blogs />} />
       {/* <Route path="/careers" element={<Careers />} /> */}
     </Routes>
 )
